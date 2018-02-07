@@ -1,0 +1,58 @@
+{
+  "api": {
+    "ratelimit": 1,
+    "calls": {
+      "accounts": {
+        "delay": 3,
+        "priority": 1,
+        "arguments": null
+      }
+    },
+    "services": [
+      {
+        "name": "coinigy",
+        "credentials": {},
+        "subscriptions": {
+          "TICKER": "ticker"
+        },
+
+        "exchanges": [
+          "BTRX"
+        ],
+
+        "endpoints": {
+          "rest": "https://api.coinigy.com/api/v1",
+          "websocket": "wss://sc-02.coinigy.com/socketcluster/"
+        }
+      }
+    ]
+  },
+
+  "logger": {
+    "level": "INFO",
+    "modules": {
+      "test": {
+        "level": "DEBUG"
+      },
+      "api": {
+        "level": "DEBUG"
+      },
+      "coinigy": {
+        "level": "DEBUG"
+      }
+    }
+  },
+
+  "currencies": [
+    "BTC",
+    "BTG",
+    "DASH",
+    "ETH",
+    "LTC",
+    "USDT",
+    "XLM",
+    "XMR",
+    "XRP"
+  ]
+
+}
