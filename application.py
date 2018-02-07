@@ -13,15 +13,17 @@ with open("nombot-config.json") as config_handle:
     CONFIG = json.loads(config_handle.read())
     for service in CONFIG['api']['services']:
 
+        service_name = service['name'].upper()
+
         # Configure the credentials
         service["credentials"] = {
-            "apikey": os.environ.get(f"{service['name'].upper()}_APIKEY"),
-            "secret": os.environ.get(f"{service['name'].upper()}_SECRET")
+            "apikey": f"{service_name}_APIKEY",
+            "secret": f"{service_name}_SECRET"
         }
 
         # Find environment subscriptions
         for variable in os.environ.keys():
-            priv_key = f"{service['name'].upper()}_SUBSCRIPTION_PRIVATE"
+            priv_key = f"{service_name}_SUBSCRIPTION_PRIVATE"
             if variable == priv_key:
                 msg_type = \
                     os.environ.get(f"{priv_key}_TYPE", "ws_trade_ticker")
@@ -30,18 +32,18 @@ with open("nombot-config.json") as config_handle:
                 service["subscriptions"][variable] = msg_type
 
 
-APP = Flask(__name__)
+application = Flask(__name__)
 
 
-@APP.route('/', methods=['GET'])
+@application.route('/', methods=['GET'])
 def get_index():  # pylint: disable=missing-docstring
     return '{"Output":"Hello World"}'
 
 
-@APP.route('/', methods=['POST'])
+@application.route('/', methods=['POST'])
 def post_index():  # pylint: disable=missing-docstring
     return '{"Output":"Hello World"}'
 
 
 if __name__ == '__main__':
-    flaskrun(APP)
+    flaskrun(application)
