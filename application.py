@@ -1,6 +1,8 @@
 #!flask/bin/python
 """Main flask application"""
 
+from multiprocessing import Process
+
 from flask import Flask
 from flaskrun import flaskrun
 
@@ -22,5 +24,8 @@ def post_index():  # pylint: disable=missing-docstring
 
 
 if __name__ == '__main__':
+    # runner.main(config=CONFIG)
+    BOT = Process(target=runner.main, args={'config': CONFIG})
+    BOT.start()
     flaskrun(application)
-    runner.main(config=CONFIG)
+    BOT.join()

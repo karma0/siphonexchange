@@ -11,7 +11,10 @@
     "services": [
       {
         "name": "coinigy",
-        "credentials": {},
+        "credentials": {
+          "apikey": "{{ secret "coinigy/apikey" }}",
+          "secret": "{{ secret "coinigy/secret" }}"
+        },
         "subscriptions": {
           "TICKER": "ticker"
         },
