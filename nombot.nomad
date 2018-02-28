@@ -105,7 +105,7 @@ job "nombot" {
     # The "count" parameter specifies the number of the task groups that should
     # be running under this group. This value must be non-negative and defaults
     # to 1.
-    count = 1
+    #count = 1
 
     # The "restart" stanza configures a group's behavior on task failure. If
     # left unspecified, a default restart policy is used based on the job type.
@@ -175,10 +175,8 @@ job "nombot" {
       # are specific to each driver, so please see specific driver
       # documentation for more information.
       config {
-        image = "siphonexchange"
-        port_map {
-          db = 6379
-        }
+        image = "coollyninja/siphonexchange"
+        port "http" {}
       }
 
       # The "artifact" stanza instructs Nomad to download an artifact from a
@@ -246,7 +244,7 @@ job "nombot" {
       service {
         name = "global-exchapi-check"
         tags = ["global", "cache"]
-        port = "db"
+        port = "http"
         check {
           name     = "alive"
           type     = "tcp"
