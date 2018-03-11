@@ -294,7 +294,7 @@ job "nombot" {
       #     https://www.nomadproject.io/docs/job-specification/vault.html
       #
       vault {
-        policies      = ["marketex", "exchapi"]
+        policies      = ["secret/nombot"]
         change_mode   = "signal"
         change_signal = "SIGHUP"
       }
