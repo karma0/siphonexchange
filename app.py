@@ -4,6 +4,7 @@ from multiprocessing import Process
 
 from flask import Flask
 
+from flaskrun import flaskrun
 from config import CONFIG
 import runner
 
@@ -31,5 +32,5 @@ if __name__ == '__main__':
     })
 
     BOT.start()
-    app.run()
+    flaskrun(app)
     BOT.join()
