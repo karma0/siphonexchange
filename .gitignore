@@ -111,3 +111,10 @@ venv.bak/
 
 # nombot
 config.json
+
+# Compiled files
+terraform/*.tfstate
+terraform/*.tfstate.backup
+
+# Module directory
+terraform/.terraform

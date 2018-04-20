@@ -8,3 +8,7 @@ variable "app_name" {
   default = "siphonexchange"
 }
 
+variable "cluster_name" {
+  description = "The name of the cluster."
+  default = "koralamode"
+}
