@@ -6,7 +6,7 @@ import json
 CONFIG = {}  # type: dict
 
 # Setup configuration
-with open("nombot-config.json") as config_handle:
+with open("config.json") as config_handle:
     CONFIG = json.loads(config_handle.read())
     for service in CONFIG['api']['services']:
 

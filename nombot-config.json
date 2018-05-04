@@ -12,8 +12,10 @@
       {
         "name": "coinigy",
         "credentials": {
-          "apikey": "{{ secret "coinigy/apikey" }}",
-          "secret": "{{ secret "coinigy/secret" }}"
+          {{with secret "/secret/marketex/3rdparty/api/credentials/coinigy" }}
+          "apikey": "{{ .Data.apikey }}",
+          "secret": "{{ .Data.secret }}"
+          {{end}}
         },
         "subscriptions": {
           "TICKER": "ticker"

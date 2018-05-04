@@ -279,6 +279,12 @@ job "nombot" {
       #   env         = true
       # }
 
+      template {
+        source      = "nomad-config.json.tpl"
+        destination = "config.json"
+        perms       = 640
+      }
+
       # The "vault" stanza instructs the Nomad client to acquire a token from
       # a HashiCorp Vault server. The Nomad servers must be configured and
       # authorized to communicate with Vault. By default, Nomad will inject
