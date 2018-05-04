@@ -37,6 +37,7 @@ class Firehose(IStrategy):
         """
         self.firehose.put_record(
             **self._parametize(context["strategy"][self.apiname]["data"]))
+        return context
 
     def _parametize(self, data):
         return {

@@ -15,14 +15,14 @@ app = Flask(__name__)  # pylint: disable=invalid-name
 
 @app.route('/')
 def get_index():  # pylint: disable=missing-docstring
-    return '{{"Status":"{PUT_STREAM.status}"}}'
+    return f'{{"Status":"{PUT_STREAM.status}"}}'
 
 
 PUT_STREAM = Firehose('siphonexchange-stream')
 
 
 if __name__ == '__main__':
-    BOT = Process(target=runner.main, args={
+    BOT = Process(target=runner.main, kwargs={
         'config': CONFIG,
         'strategies': [
             runner.CoinigyStrategy(),
