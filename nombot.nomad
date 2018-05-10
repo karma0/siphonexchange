@@ -18,7 +18,7 @@ job "nombot" {
 
   # The "datacenters" parameter specifies the list of datacenters which should
   # be considered when placing this task. This must be provided.
-  datacenters = ["dc1"]
+  datacenters = ["us-east-1a", "us-east-1b", "us-east-1c"]
 
   # The "type" parameter controls the type of job, which impacts the scheduler's
   # decision on placement. This configuration is optional and defaults to
@@ -175,8 +175,10 @@ job "nombot" {
       # are specific to each driver, so please see specific driver
       # documentation for more information.
       config {
-        image = "coollyninja/siphonexchange"
-        port "http" {}
+        image = "https://482640113327.dkr.ecr.us-east-1.amazonaws.com/koralamode-default-siphonexchange"
+        port_map {
+          http = 8080
+        }
       }
 
       # The "artifact" stanza instructs Nomad to download an artifact from a
@@ -223,11 +225,11 @@ job "nombot" {
       #     https://www.nomadproject.io/docs/job-specification/resources.html
       #
       resources {
-        cpu    = 500 # 500 MHz
+        #cpu    = 500 # 500 MHz
         memory = 256 # 256MB
         network {
           mbits = 10
-          port "db" {}
+          port "http" {}
         }
       }
 
@@ -298,7 +300,7 @@ job "nombot" {
       #     https://www.nomadproject.io/docs/job-specification/vault.html
       #
       vault {
-        policies      = ["secret/nombot"]
+        policies      = ["exchapi"]
         change_mode   = "signal"
         change_signal = "SIGHUP"
       }
