@@ -15,8 +15,7 @@ resource "aws_iam_role" "firehose_role" {
       "Principal": {
         "Service": "firehose.amazonaws.com"
       },
-      "Effect": "Allow",
-      "Sid": ""
+      "Effect": "Allow"
     }
   ]
 }
@@ -25,10 +24,46 @@ EOF
 
 resource "aws_kinesis_firehose_delivery_stream" "app_stream" {
   name        = "${var.app_name}-stream"
-  destination = "s3"
+  destination = "extended_s3"
 
-  s3_configuration {
+  extended_s3_configuration {
     role_arn   = "${aws_iam_role.firehose_role.arn}"
     bucket_arn = "${aws_s3_bucket.bucket.arn}"
   }
+}
+
+resource "aws_iam_role_policy" "inline-policy" {
+  name   = "${var.app_name}_firehose_inline_policy"
+  role   = "${aws_iam_role.firehose_role.id}"
+  policy = <<EOF
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Effect": "Allow",
+      "Action": [
+        "s3:AbortMultipartUpload",
+        "s3:GetBucketLocation",
+        "s3:GetObject",
+        "s3:ListBucket",
+        "s3:ListBucketMultipartUploads",
+        "s3:PutObject"
+      ],
+      "Resource": [
+        "${aws_s3_bucket.bucket.arn}",
+        "${aws_s3_bucket.bucket.arn}/*"
+      ]
+    },
+    {
+      "Effect": "Allow",
+      "Action": [
+        "kinesis:DescribeStream",
+        "kinesis:GetShardIterator",
+        "kinesis:GetRecords"
+      ],
+      "Resource": "${aws_kinesis_firehose_delivery_stream.app_stream.arn}"
+    }
+  ]
+}
+EOF
 }
