@@ -12,3 +12,8 @@ variable "cluster_name" {
   description = "The name of the cluster."
   default = "koralamode"
 }
+
+variable "aws_iam_roles" {
+  description = "The roles associated with ECR access."
+  type = "list"
+}

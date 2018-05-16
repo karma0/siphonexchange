@@ -6,6 +6,6 @@ output "ecr_registry_url" {
   value = "${module.ecr.registry_url}"
 }
 
-output "ecr_role_name" {
-  value = "${module.ecr.role_name}"
+output "ecr_role_names" {
+  value = ["${var.aws_iam_roles}"]
 }
