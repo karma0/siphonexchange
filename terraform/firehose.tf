@@ -34,7 +34,7 @@ resource "aws_kinesis_firehose_delivery_stream" "app_stream" {
 
 resource "aws_iam_role_policy" "inline-policy" {
   name   = "${var.app_name}_firehose_inline_policy"
-  role   = "${aws_iam_role.firehose_role.id}"
+  role   = "${var.aws_iam_role_name}"
   policy = <<EOF
 {
   "Version": "2012-10-17",
@@ -59,7 +59,8 @@ resource "aws_iam_role_policy" "inline-policy" {
       "Action": [
         "kinesis:DescribeStream",
         "kinesis:GetShardIterator",
-        "kinesis:GetRecords"
+        "kinesis:GetRecords",
+        "firehose:PutRecord"
       ],
       "Resource": "${aws_kinesis_firehose_delivery_stream.app_stream.arn}"
     }

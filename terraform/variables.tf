@@ -13,7 +13,6 @@ variable "cluster_name" {
   default = "koralamode"
 }
 
-variable "aws_iam_roles" {
-  description = "The roles associated with ECR access."
-  type = "list"
+variable "aws_iam_role_name" {
+  description = "The role associated with ECR access."
 }
