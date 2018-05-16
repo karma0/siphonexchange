@@ -198,6 +198,10 @@ job "nombot" {
       #     checksum = "md5:c4aa853ad2215426eb7d70a21922e794"
       #   }
       # }
+      artifact {
+        source = "https://raw.githubusercontent.com/karma0/siphonexchange/master/config.json.tpl"
+        destination = "local/config.json.tpl"
+      }
 
       # The "logs" stanza instructs the Nomad client on how many log files and
       # the maximum size of those logs files to retain. Logging is enabled by
@@ -282,8 +286,8 @@ job "nombot" {
       # }
 
       template {
-        source      = "nomad-config.json.tpl"
-        destination = "config.json"
+        source      = "local/config.json.tpl"
+        destination = "local/config.json"
         perms       = 640
       }
 
