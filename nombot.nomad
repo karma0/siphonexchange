@@ -200,7 +200,7 @@ job "nombot" {
       # }
       artifact {
         source = "https://raw.githubusercontent.com/karma0/siphonexchange/master/config.json.tpl"
-        destination = "local/config.json.tpl"
+        destination = "local"
       }
 
       # The "logs" stanza instructs the Nomad client on how many log files and
