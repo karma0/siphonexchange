@@ -27,15 +27,15 @@
         "name": "coinigy",
 
         "credentials": {
-          {{with secret "/secret/marketex/3rdparty/api/credentials/coinigy" }}
+          {{with secret "/secret/marketex/3rdparty/api/coinigy/credentials" }}
           "apikey": "{{ .Data.apikey }}",
           "secret": "{{ .Data.secret }}"
           {{end}}
         },
 
         "subscriptions": {
-		  {{with secret "/secret/marketex/3rdparty/api/subscriptions/coinigy" }}
-          "{{ .Data.account }}": "ws_trade_ticker",
+		  {{with secret "/secret/marketex/3rdparty/api/coinigy/subscriptions" }}
+          "{{ .Data.ws_trade_ticker }}": "ws_trade_ticker",
           {{end}}
           "TICKER": "ticker"
         },
@@ -48,7 +48,7 @@
         ],
 
         "endpoints": {
-		  {{with secret "/secret/marketex/3rdparty/api/endpoints/coinigy" }}
+		  {{with secret "/secret/marketex/3rdparty/api/coinigy/endpoints" }}
           "rest": "{{ .Data.rest }}",
           "websocket": "{{ .Data.websocket }}"
           {{end}}
