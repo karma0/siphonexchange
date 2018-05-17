@@ -176,6 +176,7 @@ job "nombot" {
       # documentation for more information.
       config {
         image = "https://482640113327.dkr.ecr.us-east-1.amazonaws.com/koralamode-default-siphonexchange"
+		volumes = ["local/config.json:/app/config.json"]
         port_map {
           http = 8080
         }
@@ -200,7 +201,7 @@ job "nombot" {
       # }
       artifact {
         source = "https://raw.githubusercontent.com/karma0/siphonexchange/master/config.json.tpl"
-        destination = "local/config.json.tpl"
+        destination = "local"
       }
 
       # The "logs" stanza instructs the Nomad client on how many log files and
