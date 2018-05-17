@@ -34,21 +34,21 @@
         },
 
         "subscriptions": {
-		  {{with secret "/secret/marketex/3rdparty/api/coinigy/subscriptions" }}
+          {{with secret "/secret/marketex/3rdparty/api/coinigy/subscriptions" }}
           "{{ .Data.ws_trade_ticker }}": "ws_trade_ticker",
           {{end}}
           "TICKER": "ticker"
         },
 
         "exchanges": [
-		  "BITS",
+          "BITS",
           "BTRX",
-		  "KRKN",
-		  "PLNX"
+          "KRKN",
+          "PLNX"
         ],
 
         "endpoints": {
-		  {{with secret "/secret/marketex/3rdparty/api/coinigy/endpoints" }}
+          {{with secret "/secret/marketex/3rdparty/api/coinigy/endpoints" }}
           "rest": "{{ .Data.rest }}",
           "websocket": "{{ .Data.websocket }}"
           {{end}}
@@ -80,9 +80,9 @@
     "BTC",
     "BTG",
     "DASH",
-	"DOGE",
-	"DOPE",
-	"ETC",
+    "DOGE",
+    "DOPE",
+    "ETC",
     "ETH",
     "LTC",
     "NXT",
@@ -94,7 +94,7 @@
     "XLM",
     "XMR",
     "XRP",
-	"ZEC"
+    "ZEC"
   ]
 
 }
