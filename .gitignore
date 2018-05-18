@@ -119,3 +119,6 @@ terraform/*.tfstate.backup
 # Module directory
 terraform/.terraform
 local
+
+# Ensure there are no accidents
+*.pem
