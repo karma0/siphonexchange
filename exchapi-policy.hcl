@@ -1,3 +1,3 @@
-path "/secret/marketex/3rdparty/api/credentials/*" {
+path "/secret/marketex/*" {
   capabilities = ["read", "list"]
 }
