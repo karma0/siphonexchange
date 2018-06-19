@@ -1,100 +1,74 @@
 {
   "api": {
-    "ratelimit": 1,
 
     "calls": {
-      "accounts": {
-        "delay": 3,
-        "priority": 1,
-        "arguments": null
+
+      "fetchOrderBook": {
+        "delay": 1,
       },
 
-	  "all": {
-		"delay": 1,
-		"priority": 1,
-		"arguments": {
-		  "exchange_code": "BTRX",
-		  "exchange_market": "BTC/USDT",
-		  "type": "all"
-		}
-	  }
+      "fetchTickers": {
+        "delay": 5
+      },
+
+      "fetchTrades": {
+        "delay": 3
+      }
 
     },
 
     "services": [
 
       {
-        "name": "coinigy",
+        "name": "ccxt",
 
         "credentials": {
-          {{with secret "/secret/marketex/3rdparty/api/coinigy/v1/credentials" }}
-          "apikey": "{{ .Data.apikey }}",
+          {{with secret "/secret/marketex/3rdparty/api/bittrex/v1/credentials" }}
+          "name": "bittrex",
+          "apiKey": "{{ .Data.apikey }}",
           "secret": "{{ .Data.secret }}"
           {{end}}
         },
 
         "subscriptions": {
-          {{with secret "/secret/marketex/3rdparty/api/coinigy/v1/subscriptions" }}
-          "{{ .Data.ws_trade_ticker }}": "ws_trade_ticker",
-          {{end}}
-          "TICKER": "ticker"
         },
 
         "exchanges": [
-          "BITS",
-          "BTRX",
-          "KRKN",
-          "PLNX"
+          "bitstamp",
+          "bittrex",
+          "cex",
+          "kraken",
+          "poloniex"
         ],
 
-        "endpoints": {
-          {{with secret "/secret/marketex/3rdparty/api/coinigy/v1/endpoints" }}
-          "rest": "{{ .Data.rest }}",
-          "websocket": "{{ .Data.websocket }}"
-          {{end}}
-        }
+        "currencies": [
+	        "AEON",
+          "BCH",
+          "BTC",
+          "BTG",
+          "DASH",
+          "DOGE",
+          "DOPE",
+          "ETC",
+          "ETH",
+          "LTC",
+          "NXT",
+          "STR",
+          "USD",
+          "USDT",
+          "XBT",
+          "XDG",
+          "XLM",
+          "XMR",
+          "XRP",
+          "ZEC"
+        ]
 
       }
 
     ]
   },
 
-  "logger": {
-    "level": "WARNING",
-    "modules": {
-      "test": {
-        "level": "WARNING"
-      },
-      "api": {
-        "level": "WARNING"
-      },
-      "coinigy": {
-        "level": "WARNING"
-      }
-    }
-  },
-
-  "currencies": [
-	"AEON",
-    "BCH",
-    "BTC",
-    "BTG",
-    "DASH",
-    "DOGE",
-    "DOPE",
-    "ETC",
-    "ETH",
-    "LTC",
-    "NXT",
-    "STR",
-    "USD",
-    "USDT",
-    "XBT",
-    "XDG",
-    "XLM",
-    "XMR",
-    "XRP",
-    "ZEC"
-  ]
+  "log_level": "WARNING"
 
 }
