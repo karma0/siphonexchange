@@ -23,7 +23,7 @@
         "name": "ccxt",
 
         "credentials": {
-          {{with secret "/secret/marketex/3rdparty/api/bittrex/v1/credentials" }}
+          {{with secret "/secret/marketex/3rdparty/api/bittrex/credentials" }}
           "name": "bittrex",
           "apiKey": "{{ .Data.apikey }}",
           "secret": "{{ .Data.secret }}"
