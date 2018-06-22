@@ -1,0 +1,5 @@
+marketex/exchanges/bitstamp|noauth
+marketex/exchanges/bittrex|auth
+marketex/exchanges/cex|noauth
+marketex/exchanges/kraken|noauth
+marketex/exchanges/poloniex|noauth
