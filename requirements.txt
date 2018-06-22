@@ -10,3 +10,4 @@ boto3==1.7.4
 marshmallow==2.15.2
 requests==2.18.4
 socketclusterclient==1.2.2
+pyhcl==0.3.10
