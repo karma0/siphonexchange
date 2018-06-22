@@ -1,13 +1,13 @@
 """Load configuration for the application"""
 import os
-import json
+import hcl
 
 
 CONFIG = {}  # type: dict
 
 # Setup configuration
-with open("config.json") as config_handle:
-    CONFIG = json.loads(config_handle.read())
+with open("config.hcl") as config_handle:
+    CONFIG = hcl.load(config_handle.read())
     for service in CONFIG['api']['services']:
 
         service_name = service['name'].upper()

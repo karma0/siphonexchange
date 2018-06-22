@@ -287,8 +287,8 @@ job "nombot" {
       # }
 
       template {
-        source      = "local/config.json.tpl"
-        destination = "local/config.json"
+        source      = "local/config.hcl.tpl"
+        destination = "local/config.hcl"
         perms       = 640
       }
 
