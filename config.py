@@ -6,8 +6,8 @@ import hcl
 CONFIG = {}  # type: dict
 
 # Setup configuration
-with open("config.json") as config_handle:
-    CONFIG = hcl.load(config_handle.read())
+with open("config.hcl", 'r') as config_handle:
+    CONFIG = hcl.load(config_handle)
     for service in CONFIG['api']['services']:
 
         service_name = service['name'].upper()
