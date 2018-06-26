@@ -176,7 +176,7 @@ job "nombot" {
       # documentation for more information.
       config {
         image = "https://482640113327.dkr.ecr.us-east-1.amazonaws.com/koralamode-default-siphonexchange"
-		    volumes = ["local/config.json:/app/config.json"]
+		    volumes = ["local/config.hcl:/app/config.hcl"]
         port_map {
           http = 8080
         }
