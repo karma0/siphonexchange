@@ -18,11 +18,11 @@ class Firehose(IStrategy):
     Firehose strategy - puts data from the API onto an AWS firehose.
 
     Parameters:
-        *apiname (optional) - Defaults to 'coinigy'. Used as the key under
+        *apiname (optional) - Defaults to 'ccxt'. Used as the key under
             context["strategy"], data is the pulled from ['data'].
         *region (optional) - Region name of the AWS firehose. Default: us-east-1
     """
-    def __init__(self, name, apiname='coinigy', region='us-east-1'):
+    def __init__(self, name, apiname='ccxt', region='us-east-1'):
         self.name = name
         self.apiname = apiname
 
