@@ -16,14 +16,14 @@ from nombot.app.config import NomAppConf
 
 from bors.app.strategy import Strategy
 #from nombot.app.strategy import Strategy
-from nombot.strategies.print import PrintResult
+from bors.strategies.print import Print
 
 
 def main(strategies=None, apiclasses=None, config=None):
     """Main routine"""
     if strategies is None:
         strategies = [
-            PrintResult(),
+            Print(),
         ]
     if apiclasses is None:
         apiclasses = [CCXTApi]

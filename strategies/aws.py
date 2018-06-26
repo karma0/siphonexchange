@@ -5,7 +5,7 @@ import json
 
 import boto3
 
-from nombot.app.strategy import IStrategy
+from bors.app.strategy import IStrategy
 
 
 def serialize(data):

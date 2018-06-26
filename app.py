@@ -25,7 +25,7 @@ if __name__ == '__main__':
     BOT = Process(target=runner.main, kwargs={
         'config': CONFIG,
         'strategies': [
-            runner.PrintResult(),
+            runner.Print(),
             PUT_STREAM
         ]
     })
