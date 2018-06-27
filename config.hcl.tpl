@@ -30,11 +30,11 @@ api {
       {{end}}
 
       {{ range ls "marketex/exchanges" }}
-      exchanges = {{ .Key }}
+      exchanges = "{{ .Key }}"
       {{ end }}
 
       {{ range ls "marketex/currencies" }}
-      currencies = {{ .Key }}
+      currencies = "{{ .Key }}"
       {{ end }}
     }
 

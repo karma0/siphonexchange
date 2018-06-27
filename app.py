@@ -25,8 +25,7 @@ if __name__ == '__main__':
     BOT = Process(target=runner.main, kwargs={
         'config': CONFIG,
         'strategies': [
-            runner.CoinigyStrategy(),
-            runner.PrintResult(),
+            runner.Print(),
             PUT_STREAM
         ]
     })

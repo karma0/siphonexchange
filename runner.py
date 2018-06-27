@@ -10,29 +10,28 @@ try:
 except ImportError:
     print("Use Python coloredlogs module for colored output")
 
-from nombot.api.services.coinigy import Coinigy
-from nombot.app.builder import AppBuilder
-from nombot.app.config import AppConf
+from nombot.api.services.ccxt import CCXTApi
+from nombot.app.builder import NomAppBuilder
+from nombot.app.config import NomAppConf
 
-from nombot.app.strategy import Strategy
-from nombot.strategies.middleware.coinigy import CoinigyStrategy
-from nombot.strategies.print import PrintResult
+from bors.app.strategy import Strategy
+#from nombot.app.strategy import Strategy
+from bors.strategies.print import Print
 
 
 def main(strategies=None, apiclasses=None, config=None):
     """Main routine"""
     if strategies is None:
         strategies = [
-            CoinigyStrategy(),
-            PrintResult(),
+            Print(),
         ]
     if apiclasses is None:
-        apiclasses = [Coinigy]
+        apiclasses = [CCXTApi]
 
     # Roll out pipeline
     strat = Strategy(*strategies)
-    conf = AppConf(config)
-    impl = AppBuilder(apiclasses, strat, conf)
+    conf = NomAppConf(config)
+    impl = NomAppBuilder(apiclasses, strat, conf)
 
     # Run
     impl.run()
