@@ -22,7 +22,7 @@ api {
         {{ $svc := . }}
         {{with secret (printf "/secret/marketex/3rdparty/api/%s%s" . "credentials") }}
       credentials = {
-        name = "{{ $svc }}"
+        name = "{{ $svc | split "/" | join "" }}"
         apiKey = "{{ .Data.apikey }}"
         secret = "{{ .Data.secret }}"
       }
