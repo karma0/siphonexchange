@@ -12,3 +12,4 @@ marshmallow
 requests
 pyhcl
 socketclusterclient
+dataclasses
