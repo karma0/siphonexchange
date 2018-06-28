@@ -4,23 +4,27 @@
 Trading bot
 """
 
+import logging
+
+from bors.app.strategy import Strategy
+from bors.strategies.print import Print
+
+from nombot.app.builder import NomAppBuilder
+from nombot.app.config import NomAppConf
+from nombot.api.services.ccxt import CCXTApi
+
 try:
     import coloredlogs
     coloredlogs.install()
 except ImportError:
     print("Use Python coloredlogs module for colored output")
 
-from nombot.api.services.ccxt import CCXTApi
-from nombot.app.builder import NomAppBuilder
-from nombot.app.config import NomAppConf
-
-from bors.app.strategy import Strategy
-#from nombot.app.strategy import Strategy
-from bors.strategies.print import Print
+logging.basicConfig(level=logging.DEBUG)
 
 
 def main(strategies=None, apiclasses=None, config=None):
     """Main routine"""
+    # instantiate this first to avoid weird errors
     if strategies is None:
         strategies = [
             Print(),
@@ -28,10 +32,15 @@ def main(strategies=None, apiclasses=None, config=None):
     if apiclasses is None:
         apiclasses = [CCXTApi]
 
+    if config is None:
+        import hcl
+        with open("config.hcl", 'r') as handle:
+            config = hcl.load(handle)
+
     # Roll out pipeline
+    app_conf = NomAppConf(config)
     strat = Strategy(*strategies)
-    conf = NomAppConf(config)
-    impl = NomAppBuilder(apiclasses, strat, conf)
+    impl = NomAppBuilder(apiclasses, strat, app_conf)
 
     # Run
     impl.run()

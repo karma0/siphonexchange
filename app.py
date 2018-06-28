@@ -13,23 +13,35 @@ from strategies.aws import Firehose
 app = Flask(__name__)  # pylint: disable=invalid-name
 
 
-@app.route('/')
-def get_index():  # pylint: disable=missing-docstring
-    return f'{{"Status":"{PUT_STREAM.status}"}}'
+class Main:
+    put_stream = Firehose('siphonexchange-stream')
 
+    def __init__(self):
+        self.bot = Process(target=runner.main, kwargs={
+            'config': CONFIG,
+            'strategies': [
+                runner.Print(),
+                self.put_stream
+            ]
+        })
 
-PUT_STREAM = Firehose('siphonexchange-stream')
+    def status(self):
+        return self.put_stream.status
+
+    def start(self):
+        self.bot.start()
+
+    def stop(self):
+        self.bot.join()
 
 
 if __name__ == '__main__':
-    BOT = Process(target=runner.main, kwargs={
-        'config': CONFIG,
-        'strategies': [
-            runner.Print(),
-            PUT_STREAM
-        ]
-    })
+    bot = Main()
 
-    BOT.start()
+    @app.route('/')
+    def get_index():  # pylint: disable=missing-docstring
+        return f'{{"Status":"{bot.status()}"}}'
+
+    bot.start()
     flaskrun(app)
-    BOT.join()
+    bot.stop()
